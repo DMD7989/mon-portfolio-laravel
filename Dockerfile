@@ -1,5 +1,5 @@
-# 1. On utilise une machine virtuelle avec PHP 8.2
-FROM php:8.2-cli
+# 1. On utilise une machine virtuelle avec PHP 8.4
+FROM php:8.4-cli
 
 # 2. On installe les outils nécessaires sur le serveur
 RUN apt-get update && apt-get install -y unzip zip git libsqlite3-dev
