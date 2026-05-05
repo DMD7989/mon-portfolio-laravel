@@ -213,7 +213,7 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="tl-header">
-                        <h4 class="tl-title">Développeur Full Stack</h4>
+                        <h4 class="tl-title">Développeur</h4>
                         <span class="tl-date">2023 – 2026</span>
                     </div>
                     <p class="tl-desc">
@@ -276,10 +276,6 @@
                 <div class="ref-item">
                     <p><strong style="color: white; font-size: 1.05rem;">Fatoumata Kaloga</strong></p>
                     <p style="color: var(--primary); font-size: 0.9rem;">+223 76 14 50 34</p>
-                </div>
-                <div class="ref-item">
-                    <p><strong style="color: white; font-size: 1.05rem;">Ibrahim Dembélé</strong></p>
-                    <p style="color: var(--primary); font-size: 0.9rem;">+223 89 90 14 45</p>
                 </div>
             </div>
 
