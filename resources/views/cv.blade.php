@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CV Ultra-Premium - Djimé Dembélé</title>
+    <title>CV | Djimé Dembélé - Développeur Full Stack</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
@@ -26,7 +26,8 @@
         /* SIDEBAR (Élargie légèrement pour accueillir plus de contenu) */
         .cv-sidebar { width: 36%; background: var(--sidebar-bg); border-right: 1px solid var(--border-color); padding: 50px 30px; box-sizing: border-box; display: flex; flex-direction: column; }
         .avatar-container { text-align: center; margin-bottom: 30px; }
-        .avatar { width: 130px; height: 130px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: white; margin: 0 auto 15px auto; box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); border: 4px solid var(--cv-bg); }
+        .avatar { position: relative; overflow: hidden; width: 150px; height: 150px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 800; color: white; margin: 0 auto 15px auto; box-shadow: 0 0 25px rgba(59, 130, 246, 0.4); border: 4px solid var(--cv-bg); }
+        .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
         .sidebar-name { font-size: 2.2rem; font-weight: 900; margin: 0 0 5px 0; text-align: center; line-height: 1.1;}
         .sidebar-job { font-size: 1.1rem; color: var(--primary); font-weight: 500; text-align: center; margin: 0 0 40px 0; }
 
@@ -66,7 +67,24 @@
         .ref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; background: rgba(255,255,255,0.02); padding: 20px; border-radius: 12px; border: 1px solid var(--border-color); }
         .ref-item p { margin: 0; line-height: 1.6; }
 
+        .contact-item a { color: inherit; text-decoration: none; word-break: break-all; }
+        .contact-item a:hover { color: white; text-decoration: underline; }
+        .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+        .tl-tags span { font-size: 0.72rem; color: #cbd5e1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 3px 9px; border-radius: 5px; font-weight: 500; }
+        .timeline-item, .ref-grid { break-inside: avoid; }
+        .actions { display: flex; gap: 10px; }
+        .btn-print { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--border-color); padding: 12px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+        .btn-print:hover { background: rgba(255,255,255,0.1); }
+
+        @media print {
+            @page { size: A4; margin: 0; }
+            body { padding: 0; background: var(--cv-bg); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .glow-bg, .action-bar { display: none; }
+            #cv-content { max-width: none; border: none; border-radius: 0; box-shadow: none; }
+        }
+
         @media (max-width: 768px) {
+            .action-bar { flex-direction: column; gap: 12px; }
             #cv-content { flex-direction: column; }
             .cv-sidebar { width: 100%; border-right: none; border-bottom: 1px solid var(--border-color); padding: 40px 20px; }
             .cv-main { width: 100%; padding: 40px 20px; }
@@ -81,14 +99,20 @@
 
     <div class="action-bar">
         <a href="/">&larr; Retour au Portfolio</a>
-        <button class="btn-download" onclick="downloadPDF()">📥 Exporter le CV en PDF</button>
+        <div class="actions">
+            <button class="btn-print" onclick="window.print()">🖨️ Imprimer</button>
+            <button class="btn-download" onclick="downloadPDF()">📥 Exporter le CV en PDF</button>
+        </div>
     </div>
 
     <div id="cv-content">
 
         <div class="cv-sidebar">
             <div class="avatar-container">
-                <div class="avatar">DD</div>
+                <div class="avatar">
+                    <img src="/images/profil.jpg" alt="Djimé Dembélé" onerror="this.remove()">
+                    <span>DD</span>
+                </div>
                 <h1 class="sidebar-name">Djimé<br>Dembélé</h1>
                 <p class="sidebar-job">Développeur Full Stack</p>
             </div>
@@ -110,7 +134,15 @@
                     <div class="contact-icon">
                         <svg width="18" height="18" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
                     </div>
-                    github.com/DMD7989
+                    <a href="https://github.com/DMD7989" target="_blank" rel="noopener">github.com/DMD7989</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div>
+                    <a href="mailto:dembeledjime83@gmail.com">dembeledjime83@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg></div>
+                    <a href="https://www.linkedin.com/in/djim%C3%A9-dembel%C3%A9-0a0118274/" target="_blank" rel="noopener">linkedin.com/in/djimé-dembelé</a>
                 </div>
             </div>
 
@@ -121,7 +153,9 @@
                 <div class="skills-badges">
                     <span class="badge">Spring Boot</span>
                     <span class="badge">Java 21</span>
-                    <span class="badge">Laravel</span>
+                    <span class="badge">Laravel / PHP</span>
+                    <span class="badge">REST & JWT</span>
+                    <span class="badge">PostgreSQL</span>
                     <span class="badge">MySQL</span>
                 </div>
             </div>
@@ -130,7 +164,19 @@
                 <p>Frontend & Mobile</p>
                 <div class="skills-badges">
                     <span class="badge">Angular / TS</span>
+                    <span class="badge">React</span>
+                    <span class="badge">Tailwind CSS</span>
                     <span class="badge">Flutter / Dart</span>
+                </div>
+            </div>
+
+            <div class="skill-group">
+                <p>DevOps & Qualité</p>
+                <div class="skills-badges">
+                    <span class="badge">Docker</span>
+                    <span class="badge">GitHub Actions (CI)</span>
+                    <span class="badge">Tests (Testcontainers)</span>
+                    <span class="badge">UML</span>
                 </div>
             </div>
 
@@ -169,7 +215,7 @@
         <div class="cv-main">
 
             <p class="profile-summary">
-                Passionné par l'ingénierie logicielle et la résolution de problèmes complexes. Fort d'une solide formation académique (Master MIAGE) et d'une expertise technique Full Stack & Mobile, je conçois des architectures robustes et sécurisées. Mon approche est centrée sur la qualité du code, l'expérience utilisateur et l'atteinte des objectifs métiers.
+                Passionné par l'ingénierie logicielle et la résolution de problèmes complexes. Fort d'une solide formation académique (Master MIAGE) et d'une expertise technique Full Stack & Mobile (Spring Boot, Angular, React, Flutter, Laravel), je conçois des plateformes robustes et sécurisées, notamment pour des usages concrets au Mali : alertes citoyennes, transport, agriculture et éducation. Mon approche est centrée sur la qualité du code, l'expérience utilisateur et l'atteinte des objectifs métiers.
             </p>
 
             <div class="section-header">
@@ -182,13 +228,62 @@
             <div class="timeline">
                 <div class="timeline-item">
                     <div class="tl-header">
+                        <h4 class="tl-title">EcoleInnov</h4>
+                        <span class="tl-date">Gestion Scolaire</span>
+                    </div>
+                    <p class="tl-subtitle">Spring Boot | Java 17 | Angular 20 | PostgreSQL</p>
+                    <p class="tl-desc">Plateforme complète de gestion d&#39;établissement : inscriptions, notes et bulletins trimestriels en PDF, paiements et finances, pointage du personnel, messagerie et calendrier scolaire. Authentification JWT, rôles dont super-administrateur, notifications WhatsApp (Twilio) et e-mail.</p>
+                    <div class="tl-tags"><span>Spring Boot</span><span>Angular</span><span>Tailwind</span><span>JWT</span><span>Twilio</span></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-header">
+                        <h4 class="tl-title">N&#39;yé</h4>
+                        <span class="tl-date">Alerte Personnes Disparues</span>
+                    </div>
+                    <p class="tl-subtitle">Spring Boot | Flutter | Angular | JWT / OTP</p>
+                    <p class="tl-desc">Plateforme de signalement et de recherche de personnes disparues au Mali : cycle de vie complet des alertes (création, validation, rejet, clôture), modération, carte de chaleur d&#39;administration et application mobile. Intégration continue sur chaque composant.</p>
+                    <div class="tl-tags"><span>Java 21</span><span>Flutter</span><span>Angular</span><span>CI GitHub Actions</span></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-header">
+                        <h4 class="tl-title">NS CAR</h4>
+                        <span class="tl-date">Système VTC · Bamako</span>
+                    </div>
+                    <p class="tl-subtitle">Flutter | React / TypeScript | OpenStreetMap</p>
+                    <p class="tl-desc">Plateforme de commande de taxi : applications passager et chauffeur, tableau de bord admin. Conçue pour un public peu digitalisé (gros boutons, bilingue FR/EN, Android bas de gamme, réseau 2G–4G), avec paiement mobile money et partage automatique des commissions.</p>
+                    <div class="tl-tags"><span>Flutter</span><span>React</span><span>Mobile Money</span></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-header">
+                        <h4 class="tl-title">Volaille Connect</h4>
+                        <span class="tl-date">API Dépôt-vente</span>
+                    </div>
+                    <p class="tl-subtitle">Spring Boot 4 | Java 21 | PostgreSQL 17</p>
+                    <p class="tl-desc">API de dépôt-vente de poulets entre éleveurs et revendeurs vérifiés : inscription par OTP SMS, connexion par PIN, ventes déclarées et paiements répartis automatiquement. Montants en FCFA entiers, tests d&#39;intégration Testcontainers.</p>
+                    <div class="tl-tags"><span>REST</span><span>JWT</span><span>Testcontainers</span></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-header">
+                        <h4 class="tl-title">Ferme Digitale</h4>
+                        <span class="tl-date">API de gestion agricole</span>
+                    </div>
+                    <p class="tl-subtitle">Spring Boot | Java 21 | Flyway | Docker</p>
+                    <p class="tl-desc">API REST de gestion d&#39;une ferme digitale : migrations Flyway, documentation Swagger/OpenAPI, environnement H2 en développement et Docker Compose avec PostgreSQL en production.</p>
+                    <div class="tl-tags"><span>Flyway</span><span>Swagger</span><span>Docker</span></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="tl-header">
                         <h4 class="tl-title">CollabDev</h4>
                         <span class="tl-date">Plateforme Web</span>
                     </div>
                     <p class="tl-subtitle">Angular | Spring Boot | Gamification | RBAC</p>
-                    <p class="tl-desc">
-                        Développement d'une plateforme de co-création de projets numériques. Implémentation d'un moteur de gamification (gains de pièces, badges) et d'une gestion fine des droits d'accès basée sur les rôles (RBAC) avec système de notifications en temps réel pour le suivi des validations.
-                    </p>
+                    <p class="tl-desc">Plateforme de co-création de projets numériques. Moteur de gamification (gains de pièces, badges), gestion fine des droits d&#39;accès basée sur les rôles (RBAC) et notifications en temps réel pour le suivi des validations.</p>
+                    <div class="tl-tags"><span>Angular</span><span>RBAC</span><span>Temps réel</span></div>
                 </div>
 
                 <div class="timeline-item">
@@ -197,9 +292,8 @@
                         <span class="tl-date">API & App Mobile (v2.0)</span>
                     </div>
                     <p class="tl-subtitle">Spring Boot 3.5 | Java 21 | Flutter | JWT</p>
-                    <p class="tl-desc">
-                        Conception d'une plateforme d'autonomisation pour les femmes rurales. Création d'une API REST sécurisée gérant un module E-Commerce et des coopératives. Architecture orientée 12 Factor App et développement de l'application mobile multiplateforme en Flutter.
-                    </p>
+                    <p class="tl-desc">Plateforme d&#39;autonomisation des femmes rurales : API REST sécurisée avec module e-commerce et coopératives, architecture 12 Factor App et application mobile multiplateforme Flutter.</p>
+                    <div class="tl-tags"><span>Flutter</span><span>MySQL 8</span><span>12 Factor</span></div>
                 </div>
             </div>
 
@@ -243,7 +337,7 @@
                 <div class="timeline-item">
                     <div class="tl-header">
                         <h4 class="tl-title">Master 1 en MIAGE</h4>
-                        <span class="tl-date">2025 – Présent</span>
+                        <span class="tl-date">2025 – 2026</span>
                     </div>
                     <p class="tl-subtitle" style="margin: 0;">INTEC SUP</p>
                 </div>
