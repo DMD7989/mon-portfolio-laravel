@@ -59,7 +59,7 @@
         .projects-wrapper { max-width: 1200px; margin: 40px auto 60px auto; padding: 0 5%; width: 100%; }
         .section-heading { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 40px; color: #475569; font-weight: 600; text-align: center; }
 
-        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 30px; }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); gap: 30px; }
 
         .project-card { display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 16px; padding: 40px; transition: all 0.3s; position: relative; overflow: hidden; height: 100%; }
         .project-card:hover { border-color: rgba(59, 130, 246, 0.3); transform: translateY(-5px); background: rgba(255, 255, 255, 0.04); box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.1); }
@@ -73,12 +73,43 @@
         .project-title { font-size: clamp(1.5rem, 3vw + 0.5rem, 1.8rem); font-weight: 800; margin: 0; color: var(--text-main); }
 
         .project-status { background: rgba(59, 130, 246, 0.1); color: #60a5fa; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; border: 1px solid rgba(59, 130, 246, 0.2); white-space: nowrap; }
+        .project-status.green { background: rgba(16,185,129,0.1); color: #34d399; border-color: rgba(16,185,129,0.2); }
+        .project-status.amber { background: rgba(245,158,11,0.1); color: #fbbf24; border-color: rgba(245,158,11,0.2); }
         .project-status.angular { background: rgba(225, 29, 72, 0.1); color: #fb7185; border-color: rgba(225, 29, 72, 0.2); }
 
         .project-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.7; margin: 0; flex-grow: 1; }
 
         .project-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 30px; }
         .project-tags span { font-size: 0.8rem; color: #cbd5e1; background: rgba(255,255,255,0.05); padding: 6px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); font-weight: 500;}
+
+        .project-bg-element.pink { background: radial-gradient(circle, rgba(236,72,153,0.15) 0%, transparent 70%); }
+        .project-bg-element.amber { background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%); }
+        .project-bg-element.blue { background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 70%); }
+        .project-link { margin-top: 24px; color: #60a5fa; font-weight: 600; font-size: 0.9rem; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+        .project-link:hover { color: #93c5fd; text-decoration: underline; }
+        .section-title { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; text-align: center; margin: 0 0 40px 0; letter-spacing: -1px; }
+
+        /* --- CHIFFRES CLES --- */
+        .stats { max-width: 1000px; margin: 20px auto 40px auto; padding: 0 5%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%; }
+        .stat { text-align: center; padding: 24px 10px; border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; background: rgba(255,255,255,0.02); }
+        .stat strong { display: block; font-size: 2.2rem; font-weight: 900; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .stat span { color: var(--text-muted); font-size: 0.85rem; }
+
+        /* --- COMPETENCES --- */
+        .skills-wrapper { max-width: 1200px; margin: 40px auto; padding: 0 5%; width: 100%; }
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+        .skill-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 16px; padding: 28px; transition: all 0.3s; }
+        .skill-card:hover { border-color: rgba(139,92,246,0.35); transform: translateY(-4px); }
+        .skill-card h4 { margin: 0 0 14px 0; font-size: 1.05rem; }
+        .skill-card ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-card li { font-size: 0.8rem; color: #cbd5e1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); padding: 5px 11px; border-radius: 6px; }
+
+        /* --- ANIMATION D'APPARITION --- */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+        html { scroll-behavior: smooth; }
+        section[id] { scroll-margin-top: 90px; }
+        @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } }
 
         /* --- CONTACT SECTION --- */
         .contact-section { max-width: 800px; margin: 60px auto 80px auto; padding: 60px 5%; text-align: center; position: relative; }
@@ -107,6 +138,7 @@
             .cta-container { flex-direction: column; }
             .btn { width: 100%; }
             .projects-grid { grid-template-columns: 1fr; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
             .project-card { padding: 25px 20px; }
             .project-header { flex-direction: column; align-items: flex-start; gap: 10px; }
         }
@@ -128,6 +160,8 @@
 
             <div class="nav-links" id="nav-menu">
                 <a href="#projets">Projets</a>
+                <a href="#competences">Compétences</a>
+                <a href="#contact">Contact</a>
                 <a href="/mon-cv">Curriculum Vitae</a>
             </div>
         </div>
@@ -160,52 +194,81 @@
         </div>
     </main>
 
+    <div class="stats reveal">
+        <div class="stat"><strong>7</strong><span>Projets réalisés</span></div>
+        <div class="stat"><strong>4</strong><span>Stacks maîtrisées</span></div>
+        <div class="stat"><strong>3</strong><span>Apps mobiles Flutter</span></div>
+        <div class="stat"><strong>🇲🇱</strong><span>Impact local, Mali</span></div>
+    </div>
+
+    @php
+        $projects = [
+            ['title' => 'EcoleInnov', 'status' => '🎓 Gestion Scolaire', 'class' => 'blue', 'badge' => '',
+             'desc' => "Plateforme complète de gestion d'établissement scolaire : inscriptions, classes et matières, emplois du temps, notes et bulletins trimestriels (export PDF), paiements et frais de scolarité, finances et dépenses, pointage du personnel, messagerie et annonces, calendrier scolaire. Authentification JWT, rôles dont un super-administrateur, notifications via WhatsApp (Twilio) et e-mail.",
+             'tags' => ['Spring Boot', 'Java 17', 'Angular 20', 'Tailwind CSS', 'PostgreSQL', 'JWT', 'Twilio'],
+             'url' => null],
+            ['title' => "N'yé", 'status' => '🚨 Alerte Personnes Disparues', 'class' => 'pink', 'badge' => '',
+             'desc' => "Plateforme numérique de signalement et de recherche de personnes disparues au Mali. Authentification JWT + OTP, cycle de vie complet des alertes (création, validation, rejet, clôture), modération, console d'administration avec carte de chaleur et application mobile pour le grand public. Intégration continue (CI) sur chaque composant.",
+             'tags' => ['Spring Boot', 'Java 21', 'Flutter', 'Angular', 'JWT / OTP', 'PostgreSQL'],
+             'url' => 'https://github.com/DMD7989/nye'],
+            ['title' => 'NS CAR', 'status' => '🚕 Système VTC · Bamako', 'class' => 'amber', 'badge' => 'amber',
+             'desc' => "Plateforme de commande de taxi pour une compagnie de Bamako : app passager, app chauffeur et tableau de bord admin. Pensée pour un public peu digitalisé : gros boutons, bilingue FR/EN, Android bas de gamme et réseau 2G–4G. Cartographie OpenStreetMap, paiement espèces ou mobile money avec partage automatique des commissions.",
+             'tags' => ['Flutter', 'React', 'TypeScript', 'OpenStreetMap', 'Mobile Money', 'Monorepo'],
+             'url' => null],
+            ['title' => 'Volaille Connect', 'status' => '🐔 Dépôt-vente de volailles', 'class' => 'green', 'badge' => 'green',
+             'desc' => "Plateforme de dépôt-vente de poulets au Mali : l'éleveur confie ses poulets à des revendeurs vérifiés, chaque vente est déclarée et payée via la plateforme, et chacun reçoit sa part automatiquement. API REST avec inscription par OTP SMS, connexion par PIN, montants en FCFA entiers et tests d'intégration Testcontainers.",
+             'tags' => ['Spring Boot 4', 'Java 21', 'PostgreSQL 17', 'Testcontainers', 'JWT'],
+             'url' => null],
+            ['title' => 'Ferme Digitale', 'status' => '🌾 API de gestion agricole', 'class' => 'blue', 'badge' => '',
+             'desc' => "API REST pour la gestion d'une ferme digitale. Migrations de base de données automatisées avec Flyway, documentation Swagger/OpenAPI, environnement de développement H2 et conteneurisation Docker Compose avec PostgreSQL pour la production.",
+             'tags' => ['Spring Boot', 'Java 21', 'Flyway', 'Swagger', 'Docker', 'PostgreSQL'],
+             'url' => null],
+            ['title' => 'CollabDev', 'status' => '⚡ Plateforme Collaborative', 'class' => 'green', 'badge' => 'angular',
+             'desc' => "Plateforme web innovante destinée à la co-création de projets numériques. L'application intègre un puissant moteur de gamification (pièces virtuelles, badges de compétences, niveaux) pour stimuler l'engagement. Gestion des droits d'accès basée sur les rôles (RBAC) pour administrateurs, gestionnaires et contributeurs, avec notifications en temps réel.",
+             'tags' => ['Angular', 'TypeScript', 'Spring Boot', 'Gamification', 'RBAC Security'],
+             'url' => null],
+            ['title' => 'MussoDeme (Écosystème)', 'status' => '📱 API & App Mobile (v2.0)', 'class' => '', 'badge' => '',
+             'desc' => "Solution digitale complète dédiée à l'autonomisation des femmes rurales. Backend robuste (API REST sécurisée via JWT, e-commerce, gestion de coopératives) et application mobile multiplateforme Flutter. Architecture conçue selon les principes 12 Factor App pour garantir sécurité, scalabilité et résilience.",
+             'tags' => ['Flutter / Dart', 'Spring Boot 3.5', 'Java 21', 'MySQL 8.0', 'JWT', 'REST'],
+             'url' => null],
+        ];
+    @endphp
+
     <section class="projects-wrapper" id="projets">
         <p class="section-heading">Projets Phares</p>
+        <h2 class="section-title">Ce que j'ai construit</h2>
 
         <div class="projects-grid">
-
-            <div class="project-card">
-                <div class="project-bg-element green"></div>
+            @foreach ($projects as $project)
+            <div class="project-card reveal">
+                <div class="project-bg-element {{ $project['class'] }}"></div>
                 <div class="project-content">
                     <div class="project-header">
-                        <h3 class="project-title">CollabDev</h3>
-                        <span class="project-status angular">⚡ Plateforme Collaborative</span>
+                        <h3 class="project-title">{{ $project['title'] }}</h3>
+                        <span class="project-status {{ $project['badge'] }}">{{ $project['status'] }}</span>
                     </div>
-                    <p class="project-desc">
-                        Plateforme web innovante destinée à la co-création de projets numériques. L'application intègre un puissant moteur de gamification (pièces virtuelles, badges de compétences, niveaux) pour stimuler l'engagement des utilisateurs. Implémentation d'une gestion complexe des droits d'accès basée sur les rôles (RBAC) permettant de différencier les actions des administrateurs, gestionnaires et contributeurs, le tout soutenu par un système de notifications en temps réel.
-                    </p>
+                    <p class="project-desc">{{ $project['desc'] }}</p>
                     <div class="project-tags">
-                        <span>Angular</span>
-                        <span>TypeScript</span>
-                        <span>Spring Boot</span>
-                        <span>Gamification</span>
-                        <span>RBAC Security</span>
+                        @foreach ($project['tags'] as $tag)
+                            <span>{{ $tag }}</span>
+                        @endforeach
                     </div>
+                    @if ($project['url'])
+                        <a href="{{ $project['url'] }}" target="_blank" rel="noopener" class="project-link">Voir le code sur GitHub &rarr;</a>
+                    @endif
                 </div>
             </div>
+            @endforeach
+        </div>
+    </section>
 
-            <div class="project-card">
-                <div class="project-bg-element"></div>
-                <div class="project-content">
-                    <div class="project-header">
-                        <h3 class="project-title">MussoDeme (Écosystème)</h3>
-                        <span class="project-status">📱 API & App Mobile (v2.0)</span>
-                    </div>
-                    <p class="project-desc">
-                        Solution digitale complète dédiée à l'autonomisation des femmes rurales. Le projet se divise en un backend robuste (API REST sécurisée via JWT, e-commerce, gestion de coopératives) et une application mobile multiplateforme développée en Flutter. L'architecture globale est conçue selon les principes 12 Factor App pour garantir sécurité, scalabilité et résilience.
-                    </p>
-                    <div class="project-tags">
-                        <span>Flutter / Dart</span>
-                        <span>Spring Boot 3.5</span>
-                        <span>Java 21</span>
-                        <span>MySQL 8.0</span>
-                        <span>JWT</span>
-                        <span>REST</span>
-                    </div>
-                </div>
-            </div>
-
+    <section class="skills-wrapper reveal" id="competences">
+        <p class="section-heading">Compétences</p>
+        <div class="skills-grid">
+            <div class="skill-card"><h4>⚙️ Backend</h4><ul><li>Java 21</li><li>Spring Boot</li><li>Laravel / PHP</li><li>REST &amp; JWT</li></ul></div>
+            <div class="skill-card"><h4>🎨 Frontend</h4><ul><li>Angular</li><li>TypeScript</li><li>React</li><li>HTML / CSS</li></ul></div>
+            <div class="skill-card"><h4>📱 Mobile</h4><ul><li>Flutter</li><li>Dart</li></ul></div>
+            <div class="skill-card"><h4>🚀 DevOps &amp; Données</h4><ul><li>Docker</li><li>PostgreSQL</li><li>MySQL</li><li>CI GitHub Actions</li></ul></div>
         </div>
     </section>
 
@@ -215,14 +278,14 @@
             Je suis actuellement ouvert à de nouvelles opportunités. Que vous ayez une question, un projet de développement, ou que vous souhaitiez simplement échanger sur les nouvelles technologies, n'hésitez pas à m'écrire.
         </p>
 
-        <a href="mailto:ton.email@exemple.com" class="btn btn-primary">Dites Bonjour 👋</a>
+        <a href="mailto:dembeledjime83@gmail.com" class="btn btn-primary">Dites Bonjour 👋</a>
 
         <div class="social-links">
-            <a href="https://github.com/ton-pseudo" target="_blank" class="social-link">
+            <a href="https://github.com/DMD7989" target="_blank" class="social-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
                 GitHub
             </a>
-            <a href="#" target="_blank" class="social-link">
+            <a href="https://www.linkedin.com/in/djim%C3%A9-dembel%C3%A9-0a0118274/" target="_blank" rel="noopener" class="social-link">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
                 LinkedIn
             </a>
@@ -259,6 +322,12 @@
                 navbar.classList.remove('scrolled');
             }
         });
+
+        // Apparition au scroll
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
 </body>
 </html>
